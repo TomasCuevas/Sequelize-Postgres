@@ -1,5 +1,9 @@
 import express from 'express';
+
 import { sequelize } from '../database/config';
+
+import '../database//models/Project';
+import '../database/models/Task';
 
 export class Server {
   private app;
