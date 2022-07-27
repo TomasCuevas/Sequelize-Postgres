@@ -1,29 +1,40 @@
 import express from 'express';
 
 import { sequelize } from '../database/config';
-
-import '../database//models/Project';
-import '../database/models/Task';
+import projectsRoutes from '../routes/projects/projects-routes';
 
 export class Server {
   private app;
   private port;
+  private paths = {
+    projects: '/projects',
+  };
 
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 4000;
 
     this.connectToDatabase();
+    this.middlewares();
+    this.routes();
   }
 
   private async connectToDatabase() {
     try {
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ force: false });
       console.log('Conectado a la base de datos.');
     } catch (error) {
       console.log(error);
       console.log('Error al conectarse con la base de datos.');
     }
+  }
+
+  private middlewares() {
+    this.app.use(express.json());
+  }
+
+  private routes() {
+    this.app.use(this.paths.projects, projectsRoutes);
   }
 
   public listen() {
