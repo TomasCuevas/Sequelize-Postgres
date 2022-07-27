@@ -9,15 +9,21 @@ const router = Router();
 /**
  * @controllers
  */
-import { createProjects, getProjects } from './projects-controllers';
+import {
+  createProjects,
+  deleteProject,
+  getProject,
+  getProjects,
+  updateProject,
+} from './projects-controllers';
 
 /**
  * @routes
  */
 router.get('/', getProjects);
 router.post('/', createProjects);
-router.put('/:id');
-router.delete('/:id');
-router.get('/:id');
+router.put('/:id', updateProject);
+router.delete('/:id', deleteProject);
+router.get('/:id', getProject);
 
 export default router;
