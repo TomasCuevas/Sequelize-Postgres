@@ -9,15 +9,15 @@ const router = Router();
 /**
  * @controllers
  */
-import { createTask, getTasks } from './tasks-controllers';
+import { createTask, deleteTask, getTask, getTasks, updateTask } from './tasks-controllers';
 
 /**
  * @routes
  */
 router.get('/', getTasks);
 router.post('/', createTask);
-router.put('/:id');
-router.delete('/:id');
-router.get('/:id');
+router.put('/:id', updateTask);
+router.delete('/:id', deleteTask);
+router.get('/:id', getTask);
 
 export default router;

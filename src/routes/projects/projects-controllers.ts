@@ -70,7 +70,6 @@ export const updateProject = async (req: Request, res: Response) => {
     const { name, priority, description } = req.body;
 
     const project: any = await Project.findByPk(id);
-
     if (!project) {
       res.status(404).json({
         msg: 'No existe projecto con el ID ingresado.',
@@ -82,7 +81,7 @@ export const updateProject = async (req: Request, res: Response) => {
     project.priority = priority;
     project.description = description;
 
-    await project?.save();
+    await project.save();
 
     res.status(201).json({
       project,
@@ -100,9 +99,7 @@ export const deleteProject = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const project = await Project.destroy({
-      where: {
-        id,
-      },
+      where: { id },
     });
 
     if (project === 0) {
