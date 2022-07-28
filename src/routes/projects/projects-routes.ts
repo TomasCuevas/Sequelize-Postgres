@@ -14,6 +14,7 @@ import {
   deleteProject,
   getProject,
   getProjects,
+  getProjectTasks,
   updateProject,
 } from './projects-controllers';
 
@@ -25,5 +26,6 @@ router.post('/', createProjects);
 router.put('/:id', updateProject);
 router.delete('/:id', deleteProject);
 router.get('/:id', getProject);
+router.get('/:id/tasks', getProjectTasks);
 
 export default router;

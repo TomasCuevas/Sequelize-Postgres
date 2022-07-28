@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
  * @models
  */
 import { Project } from '../../database/models/Project';
+import { Task } from '../../database/models/Task';
 
 export const getProjects = async (_req: Request, res: Response) => {
   try {
@@ -34,6 +35,25 @@ export const getProject = async (req: Request, res: Response) => {
 
     res.status(200).json({
       project,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: 'Error en el servidor. Contacte con un administrador.',
+    });
+  }
+};
+
+export const getProjectTasks = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const tasks = await Task.findAll({
+      where: { projectId: id },
+    });
+
+    res.status(200).json({
+      tasks,
     });
   } catch (error) {
     console.log(error);
