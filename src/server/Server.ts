@@ -2,12 +2,14 @@ import express from 'express';
 
 import { sequelize } from '../database/config';
 import projectsRoutes from '../routes/projects/projects-routes';
+import tasksRoutes from '../routes/tasks/tasks-routes';
 
 export class Server {
   private app;
   private port;
   private paths = {
     projects: '/projects',
+    tasks: '/tasks',
   };
 
   constructor() {
@@ -35,6 +37,7 @@ export class Server {
 
   private routes() {
     this.app.use(this.paths.projects, projectsRoutes);
+    this.app.use(this.paths.tasks, tasksRoutes);
   }
 
   public listen() {

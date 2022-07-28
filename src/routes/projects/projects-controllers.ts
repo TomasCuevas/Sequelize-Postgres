@@ -1,4 +1,8 @@
 import { Request, Response } from 'express';
+
+/**
+ * @models
+ */
 import { Project } from '../../database/models/Project';
 
 export const getProjects = async (_req: Request, res: Response) => {
